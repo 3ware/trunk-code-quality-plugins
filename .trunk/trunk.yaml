@@ -1,0 +1,12 @@
+version: 0.1
+cli:
+  version: 1.29.0
+  shell_hooks:
+    enforce: true
+plugins:
+  sources:
+    - id: trunk
+      ref: v1.11.0
+      uri: https://github.com/trunk-io/plugins
+    - id: 3ware
+      local: .

@@ -1,0 +1,96 @@
+# Standard trunk configuration for 3ware projects
+# https://docs.trunk.io/code-quality/overview/getting-started/configuration/plugins/external-repositories
+version: 0.1
+required_trunk_version: ">=1.25.0"
+
+# Applicable linters and actions will run with these runtime versions
+runtimes:
+  enabled:
+    - node@22.18.0
+    - python@3.14.4
+
+# By sourcing this plugin, repos will enable these linters
+lint:
+  files:
+    - name: github-action
+      filenames: [action.yaml, action.yml]
+  disabled:
+    # gh actions-lock handles pinning verification
+    - pinact
+  enabled:
+    - actionlint@1.7.12
+    - checkov@3.3.21
+    - cspell@10.4.0
+    - git-diff-check
+    - jsonvet@3.2.0
+    - markdownlint@0.49.1
+    - pre-commit-hooks@6.0.0:
+        commands:
+          - check-added-large-files
+          - check-merge-conflict
+          - check-yaml
+          - detect-private-key
+          - end-of-file-fixer
+          - trailing-whitespace
+    - prettier@3.9.9
+    - renovate@44.127.0
+    - shellcheck@0.11.0
+    - shfmt@3.14.1
+    - trufflehog@3.97.9
+    - yamllint@1.38.0
+    - zizmor@1.30.0
+
+  # By sourcing this plugin, repos will use these custom definitions and configs
+  definitions:
+    # actionlint runs shellcheck on `run:` blocks, so install both
+    - name: actionlint
+      tools: [actionlint, shellcheck]
+      # The upstream definition does not pass the shellcheck options trunk uses
+      environment:
+        - name: SHELLCHECK_OPTS
+          value: --enable=all
+    # https://gitlab.com/bmares/check-json5
+    # JSON files with comments fail the standard check-json check
+    - name: jsonvet
+      description: pre-commit hook which verifies .json files are valid JSON5
+      runtime: python
+      package: jsonvet
+      version: 3.1.1
+      commands:
+        - name: lint
+          output: pass_fail
+          run: jsonvet ${target}
+          success_codes: [0, 1]
+          files: [json]
+    - name: zizmor
+      files: [github-action, github-workflow]
+      commands:
+        # pedantic persona enables the stale-action-refs audit rule
+        - name: lint
+          run: zizmor --format=sarif --persona=pedantic ${target}
+  exported_configs:
+    - configs:
+        - .github/actionlint.yaml
+        - .github/zizmor.yaml
+        - configs/.commitlintrc.yaml
+
+# By sourcing this plugin, repos will enable these actions
+actions:
+  disabled:
+    - trunk-announce
+  enabled:
+    - actions-lock-verify
+    - commitlint
+    - trunk-check-pre-push
+    - trunk-fmt-pre-commit
+    - trunk-upgrade-available
+  definitions:
+    - id: actions-lock-verify
+      triggers:
+        - git_hooks: [pre-commit]
+      run: ${plugin}/scripts/actions-lock-verify.sh
+
+# By sourcing this plugin, repos will enable these tools
+tools:
+  enabled:
+    - gh@2.103.3
