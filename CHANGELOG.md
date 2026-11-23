@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.2.0](https://github.com/3ware/trunk-code-quality-plugins/compare/v1.1.1...v1.2.0) (2026-11-23)
+
+
+### Features
+
+* **plugin:** Replace rhysd with kjanat actionlint ([#11](https://github.com/3ware/trunk-code-quality-plugins/issues/11)) ([bd733e0](https://github.com/3ware/trunk-code-quality-plugins/commit/bd733e0b26e37ac2d899475f7765ae789e9b94bd))
+
+
+### Bug Fixes
+
+* **plugin:** Update renovate version to 44.258.2 ([6a9c9ea](https://github.com/3ware/trunk-code-quality-plugins/commit/6a9c9ea8a8ac49fa11bf12af2db6500508e34f28))
+
+
+### Code Refactoring
+
+* **plugin:** Move jsonvet definition to its own plugin.yaml ([#12](https://github.com/3ware/trunk-code-quality-plugins/issues/12)) ([91bccbf](https://github.com/3ware/trunk-code-quality-plugins/commit/91bccbf5f2de0fef426e686f50df32a492856f3d))
+
 ## [1.1.1](https://github.com/3ware/trunk-code-quality-plugins/compare/v1.1.0...v1.1.1) (2026-11-23)
 
 
