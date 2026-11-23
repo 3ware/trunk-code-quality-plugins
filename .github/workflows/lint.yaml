@@ -12,6 +12,8 @@ jobs:
   trunk-code-quality:
     name: Trunk Code Quality
     permissions:
+      actions: write # Allow trunk to access the actions cache
+      checks: write # Allow trunk to post annotations
       contents: read # Required to checkout the repository
     runs-on: ubuntu-slim
     concurrency:
