@@ -104,7 +104,7 @@ jobs:
         with:
           repo: ${{ github.repository }}
           branch: ${{ github.head_ref }}
-          commit_message: "re-run checks after PR title correction"
+          commit_message: re-run checks after PR title correction
           empty: true
 
   enforce-all-checks:
