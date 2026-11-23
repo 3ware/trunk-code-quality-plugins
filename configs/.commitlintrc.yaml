@@ -1,7 +1,0 @@
-header-case: lower
-header-full-stop: never
-header-max-length: 50
-body-leading-blank: always
-body-max-line-length: 72
-footer-leading-blank: always
-footer-max-line-length: 72

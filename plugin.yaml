@@ -80,7 +80,6 @@ actions:
     - trunk-announce
   enabled:
     - actions-lock-verify
-    - commitlint
     - trunk-check-pre-push
     - trunk-fmt-pre-commit
     - trunk-upgrade-available
