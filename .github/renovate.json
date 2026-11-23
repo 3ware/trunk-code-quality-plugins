@@ -25,7 +25,7 @@
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["major"],
       "addLabels": ["review-required"],
-      "commitMessagePrefix": "ci({{manager}})!: ",
+      "commitMessagePrefix": "ci(actions)!: ",
       "commitMessageTopic": "{{depName}}"
     },
     {
@@ -36,13 +36,13 @@
       "groupName": "{{manager}} non-major dependencies",
       "groupSlug": "{{manager}}-minor-patch",
       "addLabels": ["auto-merge"],
-      "commitMessagePrefix": "ci({{manager}}): "
+      "commitMessagePrefix": "ci(actions): "
     },
     {
       "description": "Version updates for gh actions-lock",
       "matchDepNames": ["github/gh-actions-lock"],
       "addLabels": ["{{#if isMajor}}review-required{{else}}auto-merge{{/if}}"],
-      "commitMessagePrefix": "ci(actionlock): "
+      "commitMessagePrefix": "ci(actions): "
     }
   ],
   "schedule": ["* 0-8 1-7 * 1"],
