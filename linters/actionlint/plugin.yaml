@@ -1,0 +1,54 @@
+# Use the maintained kjanat/actionlint fork until https://github.com/trunk-io/plugins/pull/1181 merges
+version: 0.1
+downloads:
+  - name: actionlint-kjanat
+    downloads:
+      - os:
+          linux: linux
+          macos: darwin
+        cpu:
+          x86_64: amd64
+          arm_64: arm64
+        url: https://github.com/kjanat/actionlint/releases/download/v${version}/actionlint_${version}_${os}_${cpu}.tar.gz
+      - os:
+          windows: windows
+        cpu:
+          x86_64: amd64
+          arm_64: arm64
+        url: https://github.com/kjanat/actionlint/releases/download/v${version}/actionlint_${version}_${os}_${cpu}.zip
+tools:
+  definitions:
+    - name: actionlint
+      download: actionlint-kjanat
+      shims:
+        - name: actionlint
+          target: actionlint
+      known_good_version: 1.17.0
+lint:
+  definitions:
+    - name: actionlint
+      files: [github-workflow]
+      # actionlint runs shellcheck on `run:` blocks, so install both
+      tools: [actionlint, shellcheck]
+      description: Maintained fork of actionlint for GitHub Actions workflows
+      commands:
+        - name: lint
+          # Custom parser defined in the trunk cli
+          output: actionlint
+          run: actionlint -format "{{json .}}" ${target}
+          success_codes: [0, 1]
+      suggest_if: files_present
+      environment:
+        - name: PATH
+          list: ["${linter}", "${env.PATH}"]
+        # actionlint runs shellcheck with --norc, so .shellcheckrc is ignored
+        - name: SHELLCHECK_OPTS
+          value: --enable=all
+      direct_configs:
+        - .github/actionlint.yaml
+        - .github/actionlint.yml
+      issue_url_format: https://github.com/kjanat/actionlint/blob/master/docs/checks.md
+      known_good_version: 1.17.0
+      version_command:
+        parse_regex: ${semver}
+        run: actionlint --version

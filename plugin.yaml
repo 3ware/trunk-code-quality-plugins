@@ -18,7 +18,7 @@ lint:
     # gh actions-lock handles pinning verification
     - pinact
   enabled:
-    - actionlint@1.7.12
+    - actionlint@1.17.0
     - checkov@3.3.21
     - cspell@10.4.0
     - git-diff-check
@@ -42,13 +42,6 @@ lint:
 
   # By sourcing this plugin, repos will use these custom definitions and configs
   definitions:
-    # actionlint runs shellcheck on `run:` blocks, so install both
-    - name: actionlint
-      tools: [actionlint, shellcheck]
-      # The upstream definition does not pass the shellcheck options trunk uses
-      environment:
-        - name: SHELLCHECK_OPTS
-          value: --enable=all
     # https://gitlab.com/bmares/check-json5
     # JSON files with comments fail the standard check-json check
     - name: jsonvet
@@ -70,7 +63,6 @@ lint:
           run: zizmor --config=zizmor.yaml --format=sarif --persona=pedantic ${target}
   exported_configs:
     - configs:
-        - configs/actionlint.yaml
         - configs/.markdownlint.yaml
         - configs/.shellcheckrc
         - configs/.yamllint.yaml
