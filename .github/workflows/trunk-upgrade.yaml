@@ -54,7 +54,7 @@ jobs:
           arguments: --apply-to=${{ matrix.file }} --no-to-all
           branch-name: ${{ matrix.branch }}
           github-token: ${{ steps.app-token.outputs.token }}
-          labels: trunk
+          labels: review-required,trunk
           lowercase-title: true
           prefix: ${{ matrix.prefix }}
           reviewers: chazypro
