@@ -1,7 +1,9 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:best-practices"],
-  "dependencyDashboardAutoclose": true,
+  "dependencyDashboard": {
+    "autoclose": true
+  },
   // gh actions-lock pins SHAs in actions.lock; workflows keep version tags
   "ignorePresets": ["helpers:pinGitHubActionDigests"],
   "labels": ["{{manager}}"],
