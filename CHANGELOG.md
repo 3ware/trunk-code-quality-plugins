@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/3ware/trunk-code-quality-plugins/compare/v1.0.0...v1.1.0) (2026-11-23)
+
+
+### Features
+
+* **plugin:** Export default linter config files ([82cecd9](https://github.com/3ware/trunk-code-quality-plugins/commit/82cecd934166bc7c91c6e1b6faed4a070f30e369))
+
+
+### Bug Fixes
+
+* **plugin:** Add description to actions-lock-verify definition ([221988d](https://github.com/3ware/trunk-code-quality-plugins/commit/221988d4c6009e3f21b5b766870b3021bdfa7783))
+
 ## 1.0.0 (2026-11-23)
 
 
