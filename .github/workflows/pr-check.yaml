@@ -48,6 +48,7 @@ jobs:
           requireScope: true
           scopes: |
             actions
+            config
             deps
             plugin
             release
