@@ -46,6 +46,13 @@ jobs:
             refactor
             revert
           requireScope: true
+          scopes: |
+            actions
+            deps
+            plugin
+            release
+            renovate
+            trunk
           # Deny characters &, <, and > in the subject line to ensure proper formatting
           # https://docs.slack.dev/messaging/formatting-message-text/#escaping
           subjectPattern: ^[^&<>]+$
@@ -97,7 +104,7 @@ jobs:
         with:
           repo: ${{ github.repository }}
           branch: ${{ github.head_ref }}
-          commit_message: "chore(pr-check): re-run checks after PR title correction"
+          commit_message: "re-run checks after PR title correction"
           empty: true
 
   enforce-all-checks:
