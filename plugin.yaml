@@ -72,7 +72,6 @@ lint:
     - configs:
         - .github/actionlint.yaml
         - .github/zizmor.yaml
-        - configs/.commitlintrc.yaml
 
 # By sourcing this plugin, repos will enable these actions
 actions:
