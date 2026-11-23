@@ -89,6 +89,7 @@ actions:
     - trunk-upgrade-available
   definitions:
     - id: actions-lock-verify
+      description: Pre-commit hook that verifies the GitHub Actions lockfile is up to date
       triggers:
         - git_hooks: [pre-commit]
       run: ${plugin}/scripts/actions-lock-verify.sh
