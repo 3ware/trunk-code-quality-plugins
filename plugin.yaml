@@ -33,7 +33,7 @@ lint:
           - end-of-file-fixer
           - trailing-whitespace
     - prettier@3.9.9
-    - renovate@44.127.0
+    - renovate@44.258.2
     - shellcheck@0.11.0
     - shfmt@3.14.1
     - trufflehog@3.97.9
