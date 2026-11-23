@@ -1,8 +1,10 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:best-practices"],
-  "addLabels": ["{{manager}}"],
   "dependencyDashboardAutoclose": true,
+  // gh actions-lock pins SHAs in actions.lock; workflows keep version tags
+  "ignorePresets": ["helpers:pinGitHubActionDigests"],
+  "labels": ["{{manager}}"],
   "minimumReleaseAge": "14 days",
   "reviewersFromCodeOwners": true,
   "customManagers": [
@@ -20,19 +22,22 @@
   // PRs labelled with 'auto-merge' will be approved by auto-approve job in pr check workflow
   "packageRules": [
     {
-      "description": "Major GitHub Action version updates",
+      "description": "Abandonment policy for GitHub Actions",
       "abandonmentThreshold": "2 years",
+      "matchManagers": ["github-actions"]
+    },
+    {
+      "description": "Major GitHub Action version updates",
       "matchManagers": ["github-actions"],
       "matchUpdateTypes": ["major"],
       "addLabels": ["review-required"],
-      "commitMessagePrefix": "ci(actions)!: ",
+      "commitMessagePrefix": "ci(actions): ",
       "commitMessageTopic": "{{depName}}"
     },
     {
       "description": "Minor and patch GitHub Action version updates",
-      "abandonmentThreshold": "2 years",
       "matchManagers": ["github-actions"],
-      "matchUpdateTypes": ["minor", "patch", "pin", "pinDigest", "digest"],
+      "matchUpdateTypes": ["minor", "patch"],
       "groupName": "{{manager}} non-major dependencies",
       "groupSlug": "{{manager}}-minor-patch",
       "addLabels": ["auto-merge"],
@@ -41,15 +46,14 @@
     {
       "description": "Version updates for gh actions-lock",
       "matchDepNames": ["github/gh-actions-lock"],
+      // Override the custom.regex manager label
+      "labels": ["github-actions"],
       "addLabels": ["{{#if isMajor}}review-required{{else}}auto-merge{{/if}}"],
       "commitMessagePrefix": "ci(actions): "
     }
   ],
   "schedule": ["* 0-8 1-7 * 1"],
   "vulnerabilityAlerts": {
-    "addLabels": ["security"],
-    "commitMessagePrefix": "build({{manager}}): ",
-    "rangeStrategy": "auto",
-    "schedule": ["at any time"]
+    "addLabels": ["security"]
   }
 }

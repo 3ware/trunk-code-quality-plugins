@@ -52,6 +52,7 @@ jobs:
             plugin
             release
             renovate
+            security
             trunk
           # Deny characters &, <, and > in the subject line to ensure proper formatting
           # https://docs.slack.dev/messaging/formatting-message-text/#escaping
@@ -160,7 +161,7 @@ jobs:
         with:
           allowed-authors: 3ware[bot], renovate[bot]
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          max-files-changed: "5"
+          max-files-changed: "10"
           merge-method: squash
           path-filters: .github/gh-actions-lock.version,.github/workflows/**
           required-labels: auto-merge
