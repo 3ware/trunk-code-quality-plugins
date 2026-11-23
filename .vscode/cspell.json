@@ -15,6 +15,7 @@
     "sarif",
     "scriptdir",
     "shellcheck",
+    "shfmt",
     "threeware",
     "zizmor"
   ]
