@@ -70,6 +70,9 @@ lint:
           run: zizmor --format=sarif --persona=pedantic ${target}
   exported_configs:
     - configs:
+        - configs/.markdownlint.yaml
+        - configs/.shellcheckrc
+        - configs/.yamllint.yaml
         - .github/actionlint.yaml
         - .github/zizmor.yaml
   ignore:

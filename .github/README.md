@@ -33,13 +33,15 @@ pinact is disabled in favour of `gh actions-lock`.
 
 ### Exported configs
 
-> [!IMPORTANT]
-> Exported configs should be stored in the root configs directory.
-> Local configs should be stored in `.trunk/configs`.
+These configs are shared with every consuming repository. Add a file with the
+same name to a repository to override it.
 
-[actionlint.yaml](actionlint.yaml) and [zizmor.yaml](zizmor.yaml) are shared
-with every consuming repository. Add a file with the same path to a repository
-to override it.
+- [actionlint.yaml](actionlint.yaml) and [zizmor.yaml](zizmor.yaml) are
+  customised for 3ware.
+- [.markdownlint.yaml](../configs/.markdownlint.yaml),
+  [.shellcheckrc](../configs/.shellcheckrc) and
+  [.yamllint.yaml](../configs/.yamllint.yaml) are the Trunk defaults, exported
+  so consuming repositories do not need their own copies.
 
 ### Actions
 
