@@ -42,19 +42,6 @@ lint:
 
   # By sourcing this plugin, repos will use these custom definitions and configs
   definitions:
-    # https://gitlab.com/bmares/check-json5
-    # JSON files with comments fail the standard check-json check
-    - name: jsonvet
-      description: pre-commit hook which verifies .json files are valid JSON5
-      runtime: python
-      package: jsonvet
-      version: 3.1.1
-      commands:
-        - name: lint
-          output: pass_fail
-          run: jsonvet ${target}
-          success_codes: [0, 1]
-          files: [json]
     - name: zizmor
       files: [github-action, github-workflow]
       commands:
