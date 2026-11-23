@@ -1,0 +1,61 @@
+name: Trunk Upgrade
+
+on:
+  schedule:
+    # On the first day of every month @ 8am
+    - cron: 0 8 1 * *
+  workflow_dispatch: {}
+
+permissions: {}
+
+jobs:
+  trunk-upgrade:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - id: plugin
+            file: plugin.yaml
+            prefix: "build(plugin): "
+            branch: trunk-io/update-plugin
+          - id: trunk
+            file: .trunk/trunk.yaml
+            prefix: "build(trunk): "
+            branch: trunk-io/update-trunk
+    name: Trunk Upgrade (${{ matrix.id }})
+    permissions:
+      contents: read # Required by checkout step
+    runs-on: ubuntu-slim
+    concurrency:
+      group: ${{ github.workflow }}-${{ matrix.id }}
+      cancel-in-progress: true
+    steps:
+      # Uses github.token for authentication
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+
+      # Use threeware-release application token for trunk. This ensure workflows can
+      # run on pull requests that trunk creates.
+      - name: Get GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v3.3.0
+        with:
+          client-id: ${{ secrets.THREEWARE_RELEASE_APPLICATION_ID }}
+          private-key: ${{ secrets.THREEWARE_RELEASE_APPLICATION_PRIVATE_KEY }}
+          permission-contents: write # Required to update trunk-related files
+          permission-pull-requests: write # Required to create and update pull requests
+
+      - name: Trunk Upgrade
+        uses: trunk-io/trunk-action/upgrade@v2.0.0
+        with:
+          add-paths: ${{ matrix.file }}
+          arguments: --apply-to=${{ matrix.file }} --no-to-all
+          branch-name: ${{ matrix.branch }}
+          github-token: ${{ steps.app-token.outputs.token }}
+          labels: trunk
+          lowercase-title: true
+          prefix: ${{ matrix.prefix }}
+          reviewers: chazypro
+          sign-commits: true

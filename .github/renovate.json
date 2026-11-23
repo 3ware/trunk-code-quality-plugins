@@ -1,0 +1,55 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:best-practices"],
+  "addLabels": ["{{manager}}"],
+  "dependencyDashboardAutoclose": true,
+  "minimumReleaseAge": "14 days",
+  "reviewersFromCodeOwners": true,
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Custom manager for gh actions-lock version updates",
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "github/gh-actions-lock",
+      "managerFilePatterns": ["/^\\.github/gh-actions-lock\\.version$/"],
+      "matchStrings": ["(?<currentValue>v\\d+\\.\\d+\\.\\d+)"]
+    }
+  ],
+  // Major releases add 'review-required' label
+  // Minor and patch releases add 'auto-merge' label
+  // PRs labelled with 'auto-merge' will be approved by auto-approve job in pr check workflow
+  "packageRules": [
+    {
+      "description": "Major GitHub Action version updates",
+      "abandonmentThreshold": "2 years",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["major"],
+      "addLabels": ["review-required"],
+      "commitMessagePrefix": "ci(actions)!: ",
+      "commitMessageTopic": "{{depName}}"
+    },
+    {
+      "description": "Minor and patch GitHub Action version updates",
+      "abandonmentThreshold": "2 years",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "pinDigest", "digest"],
+      "groupName": "{{manager}} non-major dependencies",
+      "groupSlug": "{{manager}}-minor-patch",
+      "addLabels": ["auto-merge"],
+      "commitMessagePrefix": "ci(actions): "
+    },
+    {
+      "description": "Version updates for gh actions-lock",
+      "matchDepNames": ["github/gh-actions-lock"],
+      "addLabels": ["{{#if isMajor}}review-required{{else}}auto-merge{{/if}}"],
+      "commitMessagePrefix": "ci(actions): "
+    }
+  ],
+  "schedule": ["* 0-8 1-7 * 1"],
+  "vulnerabilityAlerts": {
+    "addLabels": ["security"],
+    "commitMessagePrefix": "build({{manager}}): ",
+    "rangeStrategy": "auto",
+    "schedule": ["at any time"]
+  }
+}

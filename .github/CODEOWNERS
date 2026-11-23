@@ -1,0 +1,13 @@
+# Require review from repository maintainer team
+/.editorconfig @3ware/repo-maintainers
+/.github/CODEOWNERS @3ware/repo-maintainers
+/.github/README.md @3ware/repo-maintainers
+/.github/release-please-config.json @3ware/repo-maintainers
+/.github/release-please-manifest.json @3ware/repo-maintainers
+/.github/renovate.json @3ware/repo-maintainers
+/.github/zizmor.yaml @3ware/repo-maintainers
+/.vscode/** @3ware/repo-maintainers
+/CHANGELOG.md @3ware/repo-maintainers
+/configs/** @3ware/repo-maintainers
+/scripts/** @3ware/repo-maintainers
+/plugin.yaml @3ware/repo-maintainers
