@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/3ware/trunk-code-quality-plugins/compare/v1.1.0...v1.1.1) (2026-11-23)
+
+
+### Bug Fixes
+
+* **plugin:** Update path to zizmor config file ([#5](https://github.com/3ware/trunk-code-quality-plugins/issues/5)) ([e76661e](https://github.com/3ware/trunk-code-quality-plugins/commit/e76661e4761796311811c595e16f0c3979b40ef5))
+
 ## [1.1.0](https://github.com/3ware/trunk-code-quality-plugins/compare/v1.0.0...v1.1.0) (2026-11-23)
 
 
