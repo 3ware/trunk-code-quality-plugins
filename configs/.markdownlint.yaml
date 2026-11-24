@@ -8,3 +8,8 @@ line_length: false
 spaces: false
 url: false
 whitespace: false
+
+# 3ware specific markdownlint rules
+MD024:
+  # Allow duplicate headings within different parents
+  siblings_only: true
