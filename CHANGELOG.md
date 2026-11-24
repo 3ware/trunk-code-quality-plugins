@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/3ware/trunk-code-quality-plugins/compare/v1.2.0...v1.2.1) (2026-11-24)
+
+
+### Bug Fixes
+
+* **config:** Allow duplicate headings in markdown files ([aecec37](https://github.com/3ware/trunk-code-quality-plugins/commit/aecec37b0db2b2886f42642f185ae4c4675f6b00))
+
 ## [1.2.0](https://github.com/3ware/trunk-code-quality-plugins/compare/v1.1.1...v1.2.0) (2026-11-23)
 
 
