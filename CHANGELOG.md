@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/3ware/trunk-code-quality-plugins/compare/v1.2.1...v1.3.0) (2026-11-26)
+
+
+### Features
+
+* **plugin:** Add ZIZMOR_GITHUB_TOKEN environment variable ([#14](https://github.com/3ware/trunk-code-quality-plugins/issues/14)) ([57adcae](https://github.com/3ware/trunk-code-quality-plugins/commit/57adcae1a7aa629422b2a769705e465202447dbe))
+
 ## [1.2.1](https://github.com/3ware/trunk-code-quality-plugins/compare/v1.2.0...v1.2.1) (2026-11-24)
 
 
