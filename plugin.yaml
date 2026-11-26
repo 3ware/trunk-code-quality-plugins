@@ -44,6 +44,12 @@ lint:
   definitions:
     - name: zizmor
       files: [github-action, github-workflow]
+      environment:
+        # Token enables online mode for zizmor
+        # Avoid GH_TOKEN/GITHUB_TOKEN locally as gh uses them for git auth
+        - name: ZIZMOR_GITHUB_TOKEN
+          value: ${env.ZIZMOR_GITHUB_TOKEN}
+          optional: true
       commands:
         # pedantic persona enables the stale-action-refs audit rule
         - name: lint

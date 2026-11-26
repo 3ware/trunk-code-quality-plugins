@@ -63,6 +63,14 @@ same name to a repository to override it.
 - A `.github/gh-actions-lock.version` file in the consuming repository
   containing the `gh-actions-lock` version to pin, for example `v0.4.0`.
   Without it the pre-commit hook fails whenever workflows or actions change.
+- **Optional:** Set an environment variable for `ZIZMOR_GITHUB_TOKEN` to enable zizmor online mode. Add this to your shell profile:
+
+  ```sh
+  export ZIZMOR_GITHUB_TOKEN="$(gh auth token)"
+  ```
+
+  Avoid setting `GH_TOKEN` or `GITHUB_TOKEN` locally, because `gh` uses them
+  for git authentication. Online mode always run in CI.
 
 ## Usage
 
