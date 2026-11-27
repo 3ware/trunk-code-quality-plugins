@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/3ware/trunk-code-quality-plugins/compare/v1.3.0...v1.3.1) (2026-11-27)
+
+
+### Bug Fixes
+
+* **plugin:** Add upgrade logic to action lock script ([#16](https://github.com/3ware/trunk-code-quality-plugins/issues/16)) ([4cc3de2](https://github.com/3ware/trunk-code-quality-plugins/commit/4cc3de2c43b3857145d74f1ae45ce5ba7acac911))
+
 ## [1.3.0](https://github.com/3ware/trunk-code-quality-plugins/compare/v1.2.1...v1.3.0) (2026-11-26)
 
 
