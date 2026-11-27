@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Check for any GitHub Action workflow changes. If none, exit early.
-# Otherwise, install the GitHub CLI gh-actions-lock extension (if not already installed)
+# Otherwise, install the GitHub CLI gh-actions-lock extension (if missing or not the pinned version)
 # and verify the actions lock file.
 
 set -euo pipefail
@@ -10,9 +10,14 @@ if git diff --cached --quiet -- .github/workflows/ ':(glob)**/action.yml' ':(glo
 	exit 0
 fi
 
-extensions=$(gh extension list)
-if ! grep -q 'github/gh-actions-lock' <<<"${extensions}"; then
-	read -r version <.github/gh-actions-lock.version
+read -r version <.github/gh-actions-lock.version
+installed=$(gh extension list | awk -F'\t' '$2 == "github/gh-actions-lock" {print $3}')
+
+if [[ ${installed} != "${version}" ]]; then
+	if [[ -n ${installed} ]]; then
+		gh extension remove actions-lock
+	fi
+	# --upgrade would upgrade to latest and ignore --pin, so remove and reinstall instead
 	gh extension install github/gh-actions-lock --pin "${version}"
 fi
 

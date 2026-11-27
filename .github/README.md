@@ -59,7 +59,8 @@ same name to a repository to override it.
 
 - Trunk CLI `>=1.25.0`. The [Trunk VS Code extension](https://marketplace.visualstudio.com/items?itemName=Trunk.io), recommended in `.vscode/extensions.json`, installs the CLI.
 - `gh` authenticated (`gh auth login`). The `actions-lock-verify` hook
-  installs the `github/gh-actions-lock` extension on first use.
+  installs the `github/gh-actions-lock` extension on first use, and
+  reinstalls it when the installed version differs from the pinned version.
 - A `.github/gh-actions-lock.version` file in the consuming repository
   containing the `gh-actions-lock` version to pin, for example `v0.4.0`.
   Without it the pre-commit hook fails whenever workflows or actions change.
